@@ -1,6 +1,7 @@
 ###
 # Unity folders and files
 ###
+
 [Aa]ssets/AssetStoreTools*
 [Bb]uild/
 [Ll]ibrary/
@@ -12,7 +13,8 @@
 sysinfo.txt
 # Unity3D generated meta files
 *.pidb.meta
-
+BoardGame/[Ll]ogs/
+BoardGame/[Ll]ogs/*
 ###
 # VS/MD solution and project files
 ###
@@ -39,3 +41,4 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+BoardGame/Logs/
