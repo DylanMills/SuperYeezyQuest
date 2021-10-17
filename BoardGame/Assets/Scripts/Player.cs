@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     bool _isPlayerTurn;
 
+    public int _playerHealth = 100;
+
     private void Start()
     {
         _trans = GetComponent<Transform>();

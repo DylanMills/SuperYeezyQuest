@@ -27,11 +27,13 @@ public class PlayerMovement : MonoBehaviour
     bool _turnStarted;
 
     //Current turn information
-
     int _currentPlayer = 0;
     int _tileMovementAmount;
+    int _counter = 0;
 
-    //Our die
+    //Defines class references
+    Card _card = new Card();
+    Enemies _enemies = new Enemies();
     Die _die = new Die();
 
     // Start is called before the first frame update1
@@ -49,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene("BoardGame");
         }
 
-        if ((_players[0].GetCurrentTile() == 100) && !_isMoving)
+        if ((_players[0].GetCurrentTile() == 88) && !_isMoving)
         {
             _gameIsOver = true;
             _text.text = $"Game Over! You win! Press 'Space' to play again";
@@ -82,8 +84,34 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _players[_currentPlayer].SetPosition(Vector2.Lerp(_currentPos, _nextPos, _deltaT));
+    }
 
+    void enemyBattle()
+    {
+        //_enemies._enemyIndex = Random.Range(0, 4);
+        _enemies._enemyIndex = 0;
+        //int enemyHealth = _enemies.getEnemyHealth();
+        int enemyHealth = 10;
 
+        while (_players[_currentPlayer]._playerHealth > 0)
+        {
+            _text.text = $"{_enemies.getEnemyName()} approaches\n{enemyHealth} Health" +
+            $"\nType to attack";
+            Debug.Log($"Enemy health; {enemyHealth}");
+            --enemyHealth;
+
+            if (enemyHealth <= 0)
+            {
+                Debug.Log("break");
+                break;
+            }
+        }
+
+        _counter = 0;
+    }
+
+    void bossBattle()
+    {
 
     }
 
@@ -95,9 +123,15 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentPos = _players[_currentPlayer].GetPosition();
 
-
             if (Input.GetKeyDown(KeyCode.Space) && _tileMovementAmount == 0)
             {
+                ++_counter;
+                Debug.Log($"turn counter; {_counter}"); 
+                if (_counter == 5 && !_isMoving && Input.GetKeyDown(KeyCode.Space))
+                {
+                    enemyBattle();
+                }
+
                 _tileMovementAmount = _die.RollDice();
                 _text.text = $"You Rolled a {_tileMovementAmount.ToString()}";
                 _turnStarted = true;
@@ -108,16 +142,12 @@ public class PlayerMovement : MonoBehaviour
                 MoveOneTile();
             }
 
-
             if (_isMoving)
             {
-
                 UpdatePosition();
-
             }
 
-
-            if (_tileMovementAmount == 0 && !_isMoving)
+            if (_tileMovementAmount == 0 && !_isMoving && _counter != 5)
             {
                 _text.text = "Press 'Space' to roll the dice!";
                 if (_turnStarted)

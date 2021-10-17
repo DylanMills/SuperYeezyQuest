@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Die : MonoBehaviour
 {
-  public int RollDice()
+    public int RollDice()
     {
-        //float diceRoll = Random.Range(1, 6);
-        float diceRoll =88;
+        float diceRoll = Random.Range(1, 7);
         return (int)diceRoll;
     }
 }
