@@ -21,13 +21,9 @@ public class Enemies : MonoBehaviour
     public Sprite _justaBeaver;
     public Sprite _negativeKanye;
 
-    public void Start()
-    {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-    }
-
     public void getEnemySprite()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = _enemyDefaultSprite;
 
         if (_enemyIndex == 0)
