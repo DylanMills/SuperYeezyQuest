@@ -55,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_gameIsOver && Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("BoardGame");
+            //SceneManager.LoadScene("BoardGame");
+            _text.text = $"Game Over! You lose! Press 'Space' to play again";
         }
 
         if ((_players[0].GetCurrentTile() == 88) && !_isMoving)
@@ -100,20 +101,20 @@ public class PlayerMovement : MonoBehaviour
             _enemies._enemyIndex = Random.Range(0, 4);
             //_enemies.getEnemySprite();
             //enemyHealth = _enemies.getEnemyHealth();
-            enemyHealth = 10;
+            enemyHealth = 30;
             //enemyDamage = _enemies.getEnemyDamage;
-            enemyDamage = 1;
+            enemyDamage = 10;
 
             _enemyCreate = true;
         }
 
         _text.text = $"{_enemies.getEnemyName()} approaches\n{enemyHealth} Health" +
-        $"\nType space to attack";
+        $"\nType space to attack\n\n\nHealth; {_players[_currentPlayer]._playerHealth}";
 
         if (Input.GetKeyDown("space"))
         {
             Debug.Log($"enemy health; {enemyHealth}");
-            --enemyHealth;
+            enemyHealth -= 10;
 
             _players[_currentPlayer]._playerHealth -= enemyDamage;
         }
