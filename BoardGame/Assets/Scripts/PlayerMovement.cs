@@ -57,6 +57,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //SceneManager.LoadScene("BoardGame");
             _text.text = $"Game Over! You lose! Press 'Space' to play again";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
 
         if ((_players[0].GetCurrentTile() == 88) && !_isMoving)
@@ -156,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log($"turn counter; {_counter}");
                 }
 
-                if (_counter == 6)
+                if (_counter == 5)
                 {
                     _battle = true;
                     enemyBattle();
